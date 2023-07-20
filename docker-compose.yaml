@@ -2,9 +2,26 @@ services:
   db:
     image: postgres:alpine
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 128M
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
       - '5432:5432'
     volumes:
       - ./docker-compose/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  application:
+    image: chai-server-spring:latest
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+    ports:
+      - '8080:8080'
