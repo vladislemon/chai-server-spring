@@ -25,7 +25,7 @@ public abstract class CrudService<T extends Entity> {
     private final CrudRepository<T, UUID> repository;
 
     public T create(CrudCreateRequest<T> request) {
-        log.info("{}", request);
+        log.debug("{}", request);
         return save(request.toEntity());
     }
 
@@ -34,13 +34,13 @@ public abstract class CrudService<T extends Entity> {
     }
 
     public T update(CrudUpdateRequest<T> request) {
-        log.info("{}", request);
+        log.debug("{}", request);
         T oldEntity = get(request.id());
         return save(request.toEntity(oldEntity));
     }
 
     public void delete(CrudDeleteRequest<T> request) {
-        log.info("{}", request);
+        log.debug("{}", request);
         repository.delete(request.toEntity());
     }
 
