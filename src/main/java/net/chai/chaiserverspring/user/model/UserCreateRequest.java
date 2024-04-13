@@ -8,7 +8,7 @@ import net.chai.chaiserverspring.common.model.CrudCreateRequest;
 import java.time.Instant;
 
 public record UserCreateRequest(
-        @NotNull @Pattern(regexp = "[a-zA-Z0-9_-]{4,32}+") String name
+        @NotNull @Pattern(regexp = "\\A[a-zA-Z0-9_-]{4,32}\\z") String name
 ) implements CrudCreateRequest<User> {
 
     @Override

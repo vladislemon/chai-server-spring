@@ -11,7 +11,7 @@ import java.util.UUID;
 public record UserUpdateRequest(
         @NotNull UUID id,
         @Min(1) long version,
-        @NotNull @Pattern(regexp = "[a-zA-Z0-9_-]{4,32}+") String name
+        @NotNull @Pattern(regexp = "\\A[a-zA-Z0-9_-]{4,32}\\z") String name
 ) implements CrudUpdateRequest<User> {
 
     @Override
